@@ -6,6 +6,8 @@ import { toast } from "react-toastify";
 
 import axios from "../axios-config";
 
+import "./Memory.css";
+
 const Memory = () => {
   const { id } = useParams();
   const [memory, setMemory] = useState(null);
