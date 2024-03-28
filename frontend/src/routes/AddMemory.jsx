@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 import axios from "../axios-config";
 
@@ -7,6 +9,7 @@ import "./AddMemory.css";
 const AddMemory = () => {
   const [inputs, setInputs] = useState({});
   const [image, setImage] = useState(null);
+  const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -23,9 +26,10 @@ const AddMemory = () => {
         },
       });
 
-      console.log(response);
+      toast.success(response.data.msg);
+      navigate("/");
     } catch (error) {
-      console.log(error);
+      toast.error(error.response.data.msg);
     }
   };
 
@@ -49,6 +53,7 @@ const AddMemory = () => {
             id="title"
             placeholder="Defina um título"
             onChange={handleChange}
+            required
           />
         </label>
         <label>
@@ -58,6 +63,7 @@ const AddMemory = () => {
             id="description"
             placeholder="Explique o que aconteceu"
             onChange={handleChange}
+            required
           ></textarea>
         </label>
         <label>
